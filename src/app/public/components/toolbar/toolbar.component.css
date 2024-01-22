@@ -1,0 +1,29 @@
+.btn-section {
+    display:flex;
+    flex-wrap: wrap;
+    min-width: 300px;
+  }
+  
+  
+mat-toolbar {
+    background-color:#259073; 
+    font-size: 13px;
+}
+
+
+.toolbar-btn-logout {
+    background-color: #E6F99D;
+}
+  
+.toolbar-btn-logout:hover {
+    background-color: rgb(183, 255, 191);
+}
+
+.toolbar-btn-logout .toolbar-text {
+    color: black;
+}
+  
+
+.toolbar-btn .toolbar-text {
+    color: white;
+}

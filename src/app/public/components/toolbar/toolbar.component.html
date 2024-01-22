@@ -1,0 +1,23 @@
+<div class="toolbar-section">
+    <mat-toolbar>
+      <span class="spacer"></span>
+      <div class="btn-section">
+        <button mat-button class="toolbar-btn" aria-label="Company search page button">
+          <div><h5 (click)="pageVehicularCredit()" class="toolbar-text">Crédito Vehicular</h5></div>
+        </button>&nbsp;
+        <button mat-button class="toolbar-btn" aria-label="Carga rapida">
+          <div><h5 (click)="pageSavedPlans()" class="toolbar-text">Planes guardados</h5></div>
+        </button>&nbsp;
+        <button mat-button class="toolbar-btn" aria-label="User settings page button">
+          <div><h5 (click)="pageClient()" class="toolbar-text">Mis clientes</h5></div>
+        </button>&nbsp;
+        <button mat-button class="toolbar-btn" aria-label="Log out button">
+          <div><h5 (click)="pageConfiguration()" class="toolbar-text">Configuración</h5></div>
+        </button>&nbsp;
+        <button mat-button class="toolbar-btn-logout" aria-label="Log out button">
+          <div><h5 (click)="pageLogin()" class="toolbar-text">Cerrar sesión</h5></div>
+        </button>&nbsp;
+      </div>
+    </mat-toolbar>
+  </div>
+  <router-outlet></router-outlet>

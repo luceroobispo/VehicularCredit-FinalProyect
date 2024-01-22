@@ -1,0 +1,147 @@
+<div class="container">
+    <div class="header">
+        <h1 class="title">Nuevo Crédito Vehicular</h1>
+    </div>
+
+    <form id="VehicularCreditForm" method="post" [formGroup]="VehicularCreditForm" (submit)="onSubmit()">
+        <div class="rectangulo">
+            <p class="nombre">Información de su cliente y su vehículo</p>
+            <div class="User-Vehicle-Info">
+                <div class="fields-section">
+                    <div class="inputs-row">
+                        <div class="clienteDni">
+                            <label for="clientDNI">DNI del cliente</label>
+                            <input type="text" formControlName="clientDNI" id="clientDNI">
+                        </div>
+                        <div class="vehicleType">
+                            <label for="vehicleType">Tipo de vehículo</label>
+                            <input type="text" formControlName="vehicleType" id="vehicleType">
+                        </div>
+                        <div class="vehicleBrand">
+                            <label for="vehicleBrand">Marca del vehículo</label>
+                            <input type="text" formControlName="vehicleBrand" id="vehicleBrand">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fields-section">
+                    <div class="inputs-row">
+                        <div class="vehicleModel">
+                            <label for="vehicleModel">Modelo del vehículo</label>
+                            <input type="text" formControlName="vehicleModel" id="vehicleModel">
+                        </div>
+                        <div class="vehicleYear">
+                            <label for="vehicleYear">Año de fabricación del vehículo</label>
+                            <input type="text" formControlName="vehicleYear" id="vehicleYear">
+                        </div>
+                        <div class="vehiclePrice">
+                            <label for="vehiclePrice">Costo del vehículo</label>
+                            <input type="number" formControlName="vehiclePrice" id="vehiclePrice">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rectangulo2">
+            <p class="nombre2">Compra inteligente</p>
+            <div class="Compra-Inteligente">
+                <div class="fields-section">
+                    <div class="inputs-row">
+                        <div class="CuotaInicial">
+                            <label for="initialFee">Cuota inicial</label>
+                            <select class="select-input" formControlName="initialFee" id="initialFee">
+                                <option value="20">20%</option>
+                                <option value="30">30%</option>
+                            </select>
+                        </div>
+                        <div class="CuotaFinal">
+                            <label for="cuoton">Cuota final</label>
+                            <select class="select-input" formControlName="cuoton" id="cuoton">
+                                <option value="50">50%</option>
+                                <option value="40">40%</option>
+                            </select>
+                        </div>
+                        <div class="nroCuotas">
+                            <label for="nroCuotas">Número de cuotas</label>
+                            <select class="select-input" formControlName="nroCuotas" id="nroCuotas">
+                                <option value="24">24</option>
+                                <option value="36">36</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fields-section">
+                    <div class="inputs-row">
+                        <div class="SeguroDesgravamen">
+                            <label for="segDesgravamen">Seguro de desgravamen mensual</label>
+                            <div class="row-input">
+                                <input type="number" formControlName="segDesgravamen" id="segDesgravamen"><div class="symbol"><p>%</p></div>
+                            </div>
+                        </div>
+                        <div class="SeguroRiesgo">
+                            <label for="segRiesgo">Seguro de riesgo anual</label>
+                            <div class="row-input">
+                                <input type="number" formControlName="segRiesgo" id="segRiesgo"><div class="symbol"><p>%</p></div>
+                            </div>
+                        </div>
+                        <div class="TasaDeDescuento">
+                            <label for="tasaDescuento">Tasa de Descuento:</label>
+                            <div class="row-input">
+                                <input type="number" formControlName="tasaDescuento" id="tasaDescuento"><div class="symbol"><p>%</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fields-section">
+                    <div class="inputs-row">
+                        <div class="PeriodoDeGracia">
+                            <label for="PeriodosGracia">Periodos de gracia:</label>
+                            <div class="options">
+                                <div id="PeriodosGracia">
+                                    <label for="Total">
+                                        <input type="number" formControlName="graciaTotal" id="GraciaTotal"><p> Totales</p>
+                                    </label>
+                                    <label for="Parcial">
+                                        <input type="number" formControlName="graciaParcial" id="GraciaParcial"><p> Parciales</p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                
+            </div><!-- Compra-Inteligente -->
+            
+        </div>
+        <div id="errorMessages" class="error-messages" [innerHTML]="errorMessage">{{errorMessage}}</div>
+        <button class="calculate" (click)="calculateCronogram()">CALCULAR CRÉDITO</button>
+    </form>
+
+    <br>
+    <div class="guia">
+        <h4>Formulario de crédito vehicular</h4>
+        <p> Aqui puede ingresar los datos restantes para la generación de un plan de pagos, calculado por el metodo frances, para un credito vehicular.  </p>
+        <p> Los parametros que puede ingresar son: </p>
+        <ul>
+            <li> Client DNI: Indica la moneda en la que se realizarán los pagos del crédito vehicular.</li>
+            <li> Marca del vehiculo: Indica la marca del vehiculo que se estara financiando al cliente. </li>
+            <li> Tipo de vehiculo: Indica el tipo del vehiculo. </li>
+            <li> Modelo del vehiculo: Indica el Modelo vel vehiculo. </li>
+            <li> Año del vehiculo: Indica de que año es el vehiculo. </li>
+            <li> Precio del vehiculo: Indica el precio inicial del Vehiculo. </li>
+            <li> Cuota inicial: Indica el porcentaje del valor del vehículo que se pagará al momento de la compra.</li>
+            <li> Cuota final: Indica el porcentaje del valor del vehículo que se pagará al final del crédito vehicular.</li>
+            <li> Número de cuotas: Indica el número de cuotas en las que se pagará el crédito vehicular. Como se trata de una compra inteligente, este valor solo puede ser 24 o 36 meses</li>
+            <li> Seguro de desgravamen mensual: Indica el porcentaje del valor del vehículo que se como seguro de desgravamen.</li>
+            <li> Seguro de riesgo anual: Indica el porcentaje del valor del vehículo que se pagará periodicamente como seguro.</li>
+            <li> Tasa de Descuento: Tasa que se utiliza para obtener el valor presente de pagos futuros.</li>
+            <li> Periodos de gracia Totales: Numero de periodos en el que el cliente no estara obligado a realizar pagos de capital o intereses hacia la entidad. En el cronograma estos siempre estaran antes que los parciales.</li>
+            <li> Periodos de gracia Parciales: Numero de periodos en el que el cliente no esta obligado a realizar pagos de capital, pero si de los intereses generados</li>
+        </ul>
+    </div>
+</div>

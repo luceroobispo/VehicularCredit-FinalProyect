@@ -1,0 +1,72 @@
+<br>
+
+<div class="header">
+    <h1 class="title"> <strong>Planes Guardados</strong></h1>
+</div>
+
+
+<div class="mat-elevation-z8 container great-container">
+  
+   <table mat-table [dataSource]="dataSource_savedPlans">
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef> Id. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Cliente">
+          <th mat-header-cell *matHeaderCellDef> Cliente </th>
+          <td mat-cell *matCellDef="let element"> 
+            DNI: {{element.clientDNI}} 
+          </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="Vehiculo">
+          <th mat-header-cell *matHeaderCellDef> Vehiculo </th>
+          <td mat-cell *matCellDef="let element"> 
+            Tipo de vehículo: {{element.vehicleType}}
+            <br>Marca: {{element.vehicleBrand}}
+            <br>Modelo: {{element.vehicleModel}}
+            <br>Año de fabricación: {{element.vehicleYear}}
+            <br>Costo: {{element.vehiclePrice}} 
+          </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="Financiamiento">
+           <th mat-header-cell *matHeaderCellDef> Financiamiento </th>
+           <td mat-cell *matCellDef="let element"> 
+            TEM: {{(element.TEM * 100).toFixed(2)}}%
+            <br>Nro de cuotas: {{element.nDeCuotas}} 
+            <br>Cuota inicial: {{element.valorCuotaInicial}}
+            <br>Monto del prestamo: {{element.montoPrestamo}}
+            <br>Saldo a financiar: {{element.saldoFinanciar}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Acciones">
+           <th mat-header-cell *matHeaderCellDef> Acciones </th>
+           <td mat-cell *matCellDef="let element">
+            
+            <button mat-icon-button color="warn" (click)="openDialog(element.id)">
+               <mat-icon>delete</mat-icon>
+            </button>
+            
+           </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getRow(row)"></tr>
+
+    </table>
+
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons aria-label="Base de datos de los planes de crédito vehicular"></mat-paginator>
+
+</div>
+
+<div class="guia">
+  <h4>Guía de uso:</h4>
+  <p>En esta sección puede visualizar todos los planes de pagos para los creditos vehiculares guardados.</p>
+  <p>Puede usar el paginador para visualizar diferentes grupos de planes de pago de creditos vehiculares por si hubiera multiples registrados.</p>
+  <br>
+  <p>Para eliminar un plan guardado, haga click en el icono de la papelera.</p>
+  <p>Para ver el detalle de un plan guardado, haga click en la fila del plan deseado.</p>
+</div>

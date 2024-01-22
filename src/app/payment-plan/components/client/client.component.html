@@ -1,0 +1,117 @@
+<br><br><br>
+
+<div class="header">
+    <h1 class="title">Mis clientes</h1>
+</div>
+
+
+<!-- FORMULARIO DE CLIENTES -->
+<form [formGroup]="clientForm" (submit)="onSubmit()">
+
+    <div class="inputs">
+        <mat-form-field class="ctn-input">
+            <input matInput aria-label="Nombre Input" formControlName="name" placeholder="Nombre">
+            <mat-error *ngIf="clientForm.get('name')?.hasError('required')">Nombre es requerido.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="ctn-input">
+            <input matInput aria-label="Apellido Input" formControlName="lastName" placeholder="Apellido">
+            <mat-error *ngIf="clientForm.get('lastName')?.hasError('required')">Apellido es requerido.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="ctn-input">
+            <input matInput aria-label="DNI Input" formControlName="dni" placeholder="DNI">
+            <mat-error *ngIf="clientForm.get('dni')?.hasError('required')">DNI es requerido.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="ctn-input">
+            <input matInput aria-label="Email Input" formControlName="email" placeholder="Email">
+            <mat-error *ngIf="clientForm.get('email')?.hasError('required')">Email es requerido.</mat-error>
+        </mat-form-field>
+              
+        <!-- BOTONES CUANDO ESTAS EN MODO EDICION -->
+        <ng-container *ngIf="isEditMode; else elseTemplate">
+            <button mat-button color="primary">Actualizar</button>&nbsp;
+            <button mat-button color="warn" (click)="cancelEdit()">Cancelar</button>
+        </ng-container>&nbsp; 
+        
+        <!-- BOTONES CUANDO ESTAS EN MODO CREACION -->
+        <ng-template #elseTemplate>
+            <button mat-button color="primary">Agregar</button>
+        </ng-template>
+    </div>
+
+    <div id="errorMessages" class="error-messages" [innerHTML]="errorMessage">{{errorMessage}}</div>
+</form>
+    
+
+<!-- TABLA DE CLIENTES -->
+<div class="mat-elevation-z8 container">
+  
+    <table mat-table [dataSource]="dataSource_clients">
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Last Name Column -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Apellido </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      </ng-container>
+
+      <!-- DNI Column -->
+      <ng-container matColumnDef="dni">
+        <th mat-header-cell *matHeaderCellDef> DNI </th>
+        <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let element">
+        
+        <button mat-icon-button color="primary" (click)="editClient(element)">
+            <mat-icon>edit</mat-icon>
+        </button>
+        
+        <button mat-icon-button color="warn" (click)="openDialog(element.id)">
+            <mat-icon>delete</mat-icon>
+        </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons aria-label="Base de datos de clientes"></mat-paginator>
+
+</div>
+
+<br><br>
+<div class="guia">
+  <h4>Guia de uso:</h4>
+  <p>Esta tabla muestra los clientes registrados por su entidad, cuyos datos se usaran para calcular creditos vehiculares por compra inteligente</p>
+  <p>Puede usar el paginador para modificar la cantidad de clientes que desea visualizar </p>
+  <p>Para agregar un cliente llene los campos de la parte superior y presione "Agregar".</p>
+  <p>Para editar un cliente, haga click en el icono de edicion verde.<br> Para eliminar un cliente, haga click en el icono de eliminacion rojo.</p>
+  <p>Al presionar el boton de edicion, los campos de la parte superior se tendran que llenar con los nuevos datos del cliente.</p>
+  <p>Al presionar el boton de eliminacion, se abrira un dialogo de confirmacion, presione "confirmar" para eliminar el cliente de los registros de clientes .</p>
+</div>
+
+<br><br><br>

@@ -1,0 +1,110 @@
+.title {
+    color: #259073;
+    font-weight: bold;
+    font-size: 35px;
+    display: inline; 
+    position: relative;
+}
+
+.header{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.title::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px; 
+    background-color: #259073;
+  }
+
+  form {
+    margin-bottom: 20px;
+  }
+  
+  .inputs {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .ctn-input {
+    flex: 1;
+    margin-right: 30px;
+  }
+  
+
+  button {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+
+  .container {
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    padding: 20px;
+  }
+  
+
+  .mat-header-row {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+  
+
+  .mat-cell {
+    padding: 8px;
+  }
+  
+
+  .mat-icon-button {
+    margin: 0 5px;
+  }
+  
+
+  button[color="primary"] {
+    background-color: #7FDA89;
+    color: #fff;
+  }
+  
+  button[color="warn"] {
+    background-color: #FF5656;
+    color: #fff;
+  }
+  
+  button[color="primary"]:hover, button[color="warn"]:hover {
+    background-color: #e1ff00;
+    cursor: pointer;
+  }
+
+.error-messages {
+    color: #ff0000;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.guia h4{
+  color: #259073;
+  font-weight: bold;
+  font-size: 25px;
+  display: inline; 
+  position: relative;
+  text-align: justify;
+  margin-bottom: 5%;
+}
+.guia p,
+.guia ul,
+.guia li {
+  margin-top: 8px;
+}
+.guia {
+  text-align: justify;
+  margin-top: 100px;
+  margin-left: 40px;
+}

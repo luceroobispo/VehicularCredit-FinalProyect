@@ -1,0 +1,26 @@
+<mat-dialog-content class="mat-typography">
+    <div class="vCode-section">
+        <div class ="vCode-container">
+
+            <button class="btn-close" (click)="closeDialog()" mat-icon-button>
+                <mat-icon >close</mat-icon>
+            </button>
+            
+            <div class="title-container">
+            
+                <h1>Eliminar Cliente</h1>
+                <h2>¿Estás seguro de eliminar este cliente?</h2>
+            </div>
+
+            <div class="container-buttons">
+                <button class="btn-one" [mat-dialog-close]="true" >Eliminar</button> 
+                <button class="btn-two" (click)="closeDialog()">Cancelar</button> 
+            </div>
+
+            <div class="extra-information">
+                <mat-icon class="icon-waring">warning</mat-icon>
+                <p>No podrás recuperar la información de este cliente</p>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

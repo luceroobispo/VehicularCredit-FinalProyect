@@ -1,0 +1,46 @@
+<mat-dialog-content class="mat-typography">
+    <div class="vCode-section">
+        <div class ="vCode-container">
+
+            <button class="btn-close" (click)="closeDialog()" mat-icon-button>
+                <mat-icon >close</mat-icon>
+            </button>
+            
+            <div class="title-container">
+            
+                <h1>Próximamente</h1>
+                
+                <div>
+                    <p *ngIf="action === 'Renovar'">
+                        *Renovar el vehiculo: <br>
+                        el cliente renueva su vehiculo por uno nuevo, <br>
+                        comenzando un nuevo cronograma de pago para <br>
+                        un credito nuevo de compra inteligente
+
+                    </p>
+                    <p *ngIf="action === 'Quedarte'">
+                        *Quedarse con el vehiculo: <br>
+                        el cliente se queda con el vehiculo y se <br>
+                        cobra el cupo final.
+                    </p>
+
+                    <p *ngIf="action === 'Devolver'">
+                        *Vender o devolver el vehiculo: <br>
+                        el Cliente devuelve o vende el vehiculo <br>
+                        y al hacer esto cubre su gasto de la <br>
+                        cuota final.
+                    </p>
+
+                </div>
+            </div>
+
+            <img class="img-container" src="http://www.itsm-tlapa.edu.mx/master/images/Blog/construccion.jpg" alt="coming-soon">
+
+            <div class="container-buttons">
+            </div>
+
+            <div class="extra-information">
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

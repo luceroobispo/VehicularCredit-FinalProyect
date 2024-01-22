@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="user-form">
+        <h1>Bienvenido de vuelta</h1>
+        <form id="myForm" action="" method="post" [formGroup]="UserLoginForm" (submit)="onSubmit()">
+            <div class="fields-section">
+                <input type="email" placeholder="Email" formControlName="email" id="email" required>
+                <input type="password" placeholder="Contraseña" formControlName="password" id="password" required>
+
+                <button class="loginButton" type="submit">Iniciar Sesion</button>
+                <div id="errorMessages" class="error-messages" [innerHTML]="errorMessage">{{errorMessage}}</div>
+            </div>
+        </form>
+    </div>
+    <div class="register">
+        <h3>¿Todavia no tienes una cuenta?</h3>
+        <button class="cancelButton" type="button" (click)="registrarForm()">Crea una ahora</button> 
+    </div>
+</div>

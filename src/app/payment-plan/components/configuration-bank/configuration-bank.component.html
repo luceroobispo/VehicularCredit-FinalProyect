@@ -1,0 +1,150 @@
+<div class="container">
+    <div class="header">    
+    <h1 class="configuration-form">Configuración</h1>
+</div>
+    <div class="rectangulo">
+        <p class="nombre">Configuración</p>
+        <form id="myForm" action="" method="patch" [formGroup]="ConfigurationForm" (submit)="onSubmit()">
+
+            <div class="fields-section">
+                <div class="inputs-row">
+                    <div class="tipo-moneda-options">
+                        <label>Tipo de moneda:</label>
+                        <div class="options">
+                        <label for="soles">
+                            <input type="radio" id="soles" name="tipoMoneda" class="inline" formControlName="tipoMoneda" value="soles"/>
+                            Soles
+                        </label>
+                        <label for="dólares">
+                            <input type="radio" id="dolares" name="tipoMoneda" class="inline" formControlName="tipoMoneda" value="dolares"/>
+                            Dólares
+                        </label>
+                    </div>
+                    <p *ngIf="data?.tipoMoneda" class="valorActual">Valor actual: {{data.tipoMoneda}} </p>
+                </div>
+
+                    <div class="tasa-interes-options">
+                        <label>Tipo de tasa de interés:</label>
+                        <div class="options">
+                        <label for="efectiva">
+                            <input type="radio" id="efectiva" name="tipoTasaInteres" class="inline" formControlName="tipoTasaInteres" value="efectiva"/>
+                            Efectiva
+                        </label>
+                        <label for="nominal">
+                            <input type="radio" id="nominal" name="tipoTasaInteres" class= "inline" formControlName="tipoTasaInteres" value="nominal"/>
+                            Nominal
+                        </label>
+                    </div>
+                    <p *ngIf="data?.tipoTasaInteres" class="valorActual">Valor actual: {{data.tipoTasaInteres}} </p>
+                    </div>
+
+                    <div class="frecuenciaTasaInteres">
+                        <label>Frecuencia de tasa de interés:</label>
+                        <div class="options">
+                          <select id="frecuenciaTasaInteres" formControlName="frecuenciaTasaInteres" name="frecuenciaTasaInteres">
+                            <option value="">(Selecciona uno)</option>
+                            <option value="1">Diario</option>
+                            <option value="15">Quincenal</option>
+                            <option value="30">Mensual</option>
+                            <option value="90">Trimestral</option>
+                            <option value="120">Cuatrimestral</option>
+                            <option value="180">Semestral</option>
+                            <option value="360">Anual</option>
+                          </select>
+                        </div>
+                        <p *ngIf="data?.frecuenciaTasaInteres" class="valorActual">
+                            Valor actual: {{ getFrecuenciaTasaInteresLabel(data.frecuenciaTasaInteres) }}
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+        <div class="fields-section">
+            <div class="inputs-row">
+                <div class="Tasa-Anual">
+                    <label>Valor de la tasa:</label>
+                    <input placeholder="" formControlName="tasaInteres" id="valorDeTasa" >
+                    <p *ngIf="data?.tasaInteres" class="valorActual">Valor actual: {{data.tasaInteres}}%</p>
+                </div>
+                <div class="Costes-Registrales">
+                    <label>Costes registrales:</label>
+                    <input placeholder="" formControlName="costesRegistrales" id="costesRegistrales" >
+                    <p *ngIf="data?.costesRegistrales" class="valorActual">Valor actual: S/. {{data.costesRegistrales}} </p>
+                </div>
+                <div class="Costes-Notariales">
+                    <label>Costes notariales:</label>
+                    <input placeholder="" formControlName="costesNotariales" id="costesNotariales" >
+                    <p *ngIf="data?.costesNotariales" class="valorActual">Valor actual: S/. {{data.costesNotariales}} </p>
+                </div>
+            </div>
+        </div>
+
+            <div class="fields-section">
+                <div class="inputs-row">
+                    <div class="GPS">
+                        <label>GPS:</label>
+                        <input placeholder="" formControlName="GPS" id="GPS" >
+                        <p *ngIf="data?.costesNotariales" class="valorActual">Valor actual: S/. {{data.costesNotariales}} </p>
+                    </div>
+                    <div class="Valor-De-Portes">
+                        <label>Valor de los portes:</label>
+                        <input placeholder="" formControlName="portes" id="portes" >
+                        <p *ngIf="data?.portes" class="valorActual">Valor actual: S/. {{data.portes}} </p>
+                    </div>
+                    <div class="Gastos-Administrativos">
+                        <label>Gastos administrativos:</label>
+                        <input placeholder="" formControlName="gastosAdministracion" id="gastosAdministracion" >
+                        <p *ngIf="data?.gastosAdministracion" class="valorActual">Valor actual: S/. {{data.gastosAdministracion}} </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fields-section">
+                <div class="inputs-row">
+                    <div class="periodoCapitalizacion" *ngIf="ConfigurationForm.get('tipoTasaInteres')?.value === 'nominal'">
+                        <label>Periodo de capitalización:</label>
+                        <div class="options">
+                          <select id="periodoCapitalizacion" formControlName="periodoCapitalizacion" name="periodoCapitalizacion">
+                            <option value="">(Selecciona uno)</option>
+                            <option value="1">Diario</option>
+                            <option value="15">Quincenal</option>
+                            <option value="30">Mensual</option>
+                            <option value="90">Trimestral</option>
+                            <option value="120">Cuatrimestral</option>
+                            <option value="180">Semestral</option>
+                            <option value="360">Anual</option>
+                          </select>
+                        </div>
+                        <p *ngIf="data?.periodoCapitalizacion" class="valorActual">
+                            Valor actual: {{ getPeriodoCapitalizacionLabel(data.periodoCapitalizacion) }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+           
+        <button class="submitButton" type="submit">GUARDAR CONFIGURACIÓN</button>
+        <div id="errorMessages" class="error-messages" [innerHTML]="errorMessage">{{errorMessage}}</div>
+        </form>
+    </div>
+    
+    <br><br>
+    <div class="guia">
+        <h4>Formulario de Configuración</h4>
+        <p> Como entidad financiera puede configurar parametros generales que se aplicaran al momento 
+            de crear creditos vehiculares para sus clientes. </p>
+        <p> Los parametros que puede configurar son: </p>
+        <ul>
+            <li> Tipo de moneda: Indica la moneda en la que se realizarán los pagos del crédito vehicular.</li>
+            <li> Tipo de tasa de interes: Define si la tasa de interés se expresa de manera efectiva o nominal, lo que afecta cómo se calcula. </li>
+            <li> Frecuencia de tasa de interes: Indica con qué frecuencia se aplica la tasa de interés al saldo pendiente del préstamo. </li>
+            <li> Valor de la tasa: Representa el porcentaje anual aplicado al capital pendiente y determina el costo financiero total del crédito. <strong>Tiene que ser un valor positivo</strong></li>
+            <li> Costes registrales: Incluye los gastos asociados al registro legal del préstamo y la garantía sobre el vehículo. <strong>Tiene que ser un valor positivo</strong></li>
+            <li> Costes notariales: Comprende los honorarios del notario por la formalización de los documentos relacionados con el préstamo. <strong>Tiene que ser un valor positivo</strong></li>
+            <li> GPS: Cubre los gastos administrativos y los seguros asociados al procesamiento del crédito vehicular. <strong>Tiene que ser un valor positivo</strong></li>
+            <li> Valor de los portes: Valor de los portes del credito vehicular. <strong>Tiene que ser un valor positivo</strong></li>
+            <li> Gastos administrativos: Agrupa los costos administrativos relacionados con la gestión y procesamiento de las compras inteligentes. <strong>Tiene que ser un valor positivo</strong></li>
+            <li> Periodo de capitalizacion: Indica la frecuencia con la que se acumula el interés sobre el saldo pendiente del préstamo, afectando la cantidad total de interés pagado. </li>
+        </ul>
+    </div>
+    
+</div>

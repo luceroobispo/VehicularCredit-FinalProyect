@@ -1,0 +1,337 @@
+
+<br><br>
+<div class="header">
+    <h1 class="title">Cronograma</h1>
+</div>
+
+<div class="container">
+    <h3>DATOS INICIALES DEL FINANCIAMIENTO</h3>
+    <div class="data-section">
+        <div class="data-column"><!--Primera columna-->
+            
+            <div *ngIf="data.tipoTasaInteres === 'nominal'; else teaSection">
+              <label class="bold">Tasa Nominal:</label>
+              <p>{{ data.tasaInteres*100 }}%</p>
+            </div>
+    
+            <ng-template #teaSection>
+              <label class="bold">Tasa Efectiva:</label>
+              <p>{{ data.tasaInteres.toFixed(2) }}%</p>
+            </ng-template>
+
+            <div>
+                <label class="bold">Tasa Efectiva Mensual (TEM):</label>
+                <p>{{(data.TEM * 100).toFixed(2)}}%</p>
+            </div>
+    
+            <div>
+                <label class="bold"># Cuotas por año</label>
+                <p>{{data.nCuotasXAnio}}</p>
+            </div>
+        
+        </div>
+    
+        <div class="data-column"><!--Segunda columna-->
+            <div>
+                <label class="bold"># Total de cuotas:</label>
+                <p>{{data.nDeCuotas}}</p>
+            </div>
+    
+            <div>
+                <label class="bold">Cuota Inicial:</label>
+                <p>{{data.valorCuotaInicial}}</p>
+            </div>
+    
+            <div>
+                <label class="bold">Cuota Final</label>
+                <p>{{data.valorCuotaFinal}}</p>
+            </div>
+    
+        </div>
+        
+        <div class="data-column"><!--Tercera columna-->
+            <div>
+                <label class="bold">Monto del préstamo:</label>
+                <p>{{data.montoPrestamo}}</p>
+            </div>
+    
+            <div>
+                <label class="bold">Saldo a financiar con cuotas:</label>
+                <p>{{data.saldoFinanciar.toFixed(2)}}</p>
+            </div>
+        </div>
+    </div>
+
+    <h3>RESULTADOS DE LA COMPRA INTELIGENTE</h3>
+    <div class="data-section">
+       
+        <div class="data-column"><!--Primera columna-->
+            <div>
+                <label class="bold">Seguro Desgrav. Per: </label>
+                <p>{{(seguroDesgravamenPer*100).toFixed(2)}}%</p>
+            </div>
+    
+            <div>
+                <label class="bold">Seguro Riesgo: </label>
+                <p>{{seguroRiesgoPer.toFixed(2)}}</p>
+            </div>
+    
+            <div>
+                <label class="bold">Intereses: </label>
+                <p>{{interesesTotales.toFixed(2)}}</p>
+            </div>
+        </div>
+    
+        <div class="data-column"><!--Segunda columna-->
+            <div>
+                <label class="bold">Amortizacion del capital: </label>
+                <p>{{amortizacionCapitalTotal.toFixed(2)}}</p>
+            </div>
+    
+            <div>
+                <label class="bold">Seguro de desgravamen: </label>
+                <p>{{segDesgTotal.toFixed(2)}}</p>
+            </div>
+    
+            <div>
+                <label class="bold">Seguro contra todo riesgo: </label>
+                <p>{{segRiesgoTotal.toFixed(2)}}</p>
+            </div>
+        </div>
+    
+        <div class="data-column"><!--Tercera columna-->
+            <div>
+                <label class="bold">GPS: </label>
+                <p>{{gpsTotal.toFixed(2)}}</p>
+            </div>
+    
+            <div>
+                <label class="bold">Portes: </label>
+                <p>{{portesTotal.toFixed(2)}}</p>
+            </div>
+    
+            <div>
+                <label class="bold">Gastos administrativos: </label>
+                <p>{{gastosAdmTotal.toFixed(2)}}</p>
+            </div>
+        </div>
+    
+    </div>
+
+    <h3>INDICADORES DE RENTABILIDAD</h3>
+    <div class="data-section">
+        <div class="data-column"><!--Primera columna-->
+            <div>
+                <label class="bold">Tasa de descuento: </label>
+                <p>{{(data.tasaDescuento*100).toFixed(2)}}%</p>
+            </div>
+    
+            <div>
+                <label class="bold">TIR de la operación: </label>
+                <p>{{(this.TIR).toFixed(2)}}%</p>
+            </div>
+    
+            <div>
+                <label class="bold">TCEA de la operación: </label>
+                <p>{{(this.TCEA*100).toFixed(2)}}%</p>
+            </div>
+        </div>
+        
+        <div class="data-column"><!--Segunda columna-->
+            <div>
+                <label class="bold">VAN de la operacion: </label>
+                <p>{{VAN.toFixed(2)}}</p>
+            </div>
+            
+            <div>
+                <label class="bold">Cuota: </label>
+                <p>{{((cupos[data.nDeCuotas-1].Cuota)*-1).toFixed(2)}}</p>
+            </div>
+    
+            <div>
+                <label class="bold">Valor Futuro: </label>
+                <p>{{((cupos[data.nDeCuotas].Flujo)*-1).toFixed(2)}}</p>
+            </div>
+        </div>
+    
+    </div>
+
+    <h3>CRONOGRAMA DE PAGOS</h3>
+    <div class="mat-elevation-z8 container great-container ">
+        <div mat-table-container class="table-container">
+            <table mat-table [dataSource]="dataSource" matSort matSortDirection="desc">
+                <!--Periodo-->
+                <ng-container matColumnDef="Periodo">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Periodo </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.id }}
+                    </td>
+                </ng-container>
+
+                <!-- Periodo de gracia -->
+                <ng-container matColumnDef="P-G">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> P-G </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.PeriodoGracia }}
+                  </td>
+                </ng-container>
+
+                <!-- SaldoInicialCuotaFinal -->
+                <ng-container matColumnDef="SaldoInicialCuotaFinal">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Saldo Inicial Cuota Final </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.SaldoInicialCuotaFinal.toFixed(2) }}
+                    </td>
+                </ng-container>
+        
+                <!-- InteresCuotaFinal -->
+                <ng-container matColumnDef="InteresCuotaFinal">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Interes Cuota Final </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.InteresCuotaFinal.toFixed(2) }}
+                    </td>
+                </ng-container>
+
+                <!-- AmortizacionCuotaFinal -->
+                <ng-container matColumnDef="AmortCuotaFinal">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Amortizacion Cuota Final </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.AmortizacionCuotaFinal.toFixed(2) }}
+                    </td>
+                </ng-container>
+
+                <!-- SeguroDesgCuotaFinal -->
+                <ng-container matColumnDef="SeguroDesgCuotaFinal">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Seguro Desg. Cuota Final </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.SeguroDesgCuotaFinal.toFixed(2) }}
+                    </td>
+                </ng-container>
+
+                <!-- SaldoFinalCuotaFinal -->
+                <ng-container matColumnDef="SaldoFinalCuotaFinal">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Saldo Final Cuota Final </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.SaldoFinalCuotaFinal.toFixed(2) }}
+                    </td>
+                </ng-container>
+
+                <!-- SaldoInicialCuota -->
+                <ng-container matColumnDef="SaldoInicialCuota">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Saldo Inicial Cuota </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.SaldoInicial.toFixed(2) }}
+                    </td>
+                </ng-container>
+                
+                <!-- Interes -->
+                <ng-container matColumnDef="Interes">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Interes </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.Interes.toFixed(2) }}
+                    </td>
+                </ng-container>
+
+               <!-- Cuota --> 
+                <ng-container matColumnDef="Cuota">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> Cuota </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.Cuota.toFixed(2) }}
+                  </td>
+                </ng-container>
+      
+                <!-- Amortizacion -->
+                <ng-container matColumnDef="Amortizacion">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> Amortizacion </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.Amortizacion.toFixed(2) }}
+                  </td>
+                </ng-container>
+      
+                <!-- SeguroDesg -->
+                <ng-container matColumnDef="SeguroDesg">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> Seguro Desg. Cuota </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.SeguroDesg.toFixed(2) }}
+                  </td>
+                </ng-container>
+      
+                <!-- SeguroRiesg -->
+                <ng-container matColumnDef="SeguroRiesg">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> Seguro Riesgo </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.SeguroRies.toFixed(2) }}
+                  </td>
+                </ng-container>
+      
+                 <!-- GPS -->
+                 <ng-container matColumnDef="GPS">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> GPS </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.GPS.toFixed(2) }}
+                  </td>
+                </ng-container>
+      
+                <!-- Portes -->
+                <ng-container matColumnDef="Portes">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> Portes </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.Portes.toFixed(2) }}
+                  </td>
+                </ng-container>
+      
+                <!-- GastosAdm -->
+                <ng-container matColumnDef="GastosAdm">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> GastosAdm </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.GastosAdm.toFixed(2) }}
+                  </td>
+                </ng-container>
+      
+                <!-- SaldoFinal -->
+                <ng-container matColumnDef="SaldoFinal">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> SaldoFinal </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.SaldoFinal.toFixed(2) }}
+                  </td>
+                </ng-container>
+      
+                <!-- Flujo -->
+                <ng-container matColumnDef="Flujo">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> Flujo </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.Flujo.toFixed(2) }}
+                  </td>
+                </ng-container>
+      
+      
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+              </table>
+        </div>
+
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 15]" showFirstLastButtons aria-label="Cronograma de pagos de la compra inteligente"></mat-paginator>
+
+        <br>
+
+        <div>
+          <button class="btn" (click)="openDialog('Renovar')">Renovar el vehiculo</button>
+          <button class="btn" (click)="openDialog('Quedarte')">Quedarte con el auto</button>
+          <button class="btn" (click)="openDialog('Devolver')">Devolver el auto</button>
+        </div>
+
+        <br>
+        
+    </div>
+
+    <br><br><br>
+    <div class="data-section2"><!--Glosario-->
+      <p>Indicadores de rentabilidad</p>
+      <p>• VAN: EL VAN (Valor Actual Neto) es una medida financiera que evalúa la rentabilidad de un proyecto al calcular la diferencia entre el valor presente de los flujos de efectivo y la inversión inicial.</p>
+      <p>• TIR: La TIR (Tasa Interna de Retorno) es otra métrica financiera que indica la tasa de rendimiento que iguala el valor presente neto de los flujos de efectivo de un proyecto con la inversión inicial, haciendo que el VAN sea cero.</p>
+      <p>• TCEA: La TCEA (Tasa de Costo Efectivo Anual) es un indicador financiero que refleja el costo total de un crédito, expresado como una tasa de interés anual. Esta tasa incluye no solo la tasa de interés nominal, sino también todos los costos adicionales que puedan estar asociados al crédito, como comisiones, seguros y otros gastos relacionados.</p>
+      <p>• COK: El Costo de Oportunidad del Capital (COK) es el rendimiento que podría haberse obtenido al invertir el capital en la mejor alternativa disponible en lugar de en una opción específica.</p>
+    </div>
+
+</div>
